@@ -1,0 +1,8 @@
+## .ENV FILES
+.env
+.env.local
+
+## IDEA FILES
+.idea/
+*.iml
+
