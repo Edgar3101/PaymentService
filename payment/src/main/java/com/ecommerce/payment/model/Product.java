@@ -139,4 +139,76 @@ public class Product {
         this.order = order;
     }
 
+    /**
+     * Returns the unique identifier for the product.
+     *
+     * @return the {@link UUID} of the product, or {@code null} if not yet generated
+     */
+    public UUID getId() {
+        return id;
+    }
+
+    /**
+     * Returns the product name.
+     *
+     * @return the name as a {@link String}
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Returns the product price.
+     *
+     * @return the price as a {@code double}
+     */
+    public double getPrice() {
+        return price;
+    }
+
+    /**
+     * Returns the product description.
+     *
+     * @return the description as a {@link String}
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Returns the current stock quantity for the product.
+     *
+     * @return available units as an {@code int}
+     */
+    public int getStockQuantity() {
+        return stockQuantity;
+    }
+
+    /**
+     * Returns the discount percentage applied to the product.
+     *
+     * @return discount percentage as an {@code int} between 0 and 100
+     */
+    public int getPercentageDiscount() {
+        return percentageDiscount;
+    }
+
+    /**
+     * Returns the creation timestamp for the product.
+     *
+     * @return creation time as {@link LocalDateTime}
+     */
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * Returns the order associated with this product, if any.
+     *
+     * @return the owning {@link Order}, or {@code null} if not associated
+     */
+    public Order getOrder() {
+        return order;
+    }
+
 }
