@@ -2,6 +2,7 @@ package com.ecommerce.payment.model;
 
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -50,7 +51,8 @@ public class Order {
      * <p>Note: this field represents time only; if date+time is required,
      * consider using {@link java.time.Instant} or {@link java.time.LocalDateTime}.</p>
      */
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @CreationTimestamp
+    @Column(updatable = false)
     private LocalTime createdAt;
 
     /**

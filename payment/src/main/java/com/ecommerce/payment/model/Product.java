@@ -1,6 +1,8 @@
 package com.ecommerce.payment.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -56,7 +58,8 @@ public class Product {
     /**
      * Timestamp when the product was created. Stored as {@link LocalDateTime}.
      */
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     /**
