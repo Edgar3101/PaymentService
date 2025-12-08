@@ -12,3 +12,6 @@ db_data/*
 
 # grafana data
 grafana_data/
+
+# DOC folder
+docs/*
