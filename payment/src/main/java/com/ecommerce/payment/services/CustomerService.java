@@ -1,6 +1,7 @@
 package com.ecommerce.payment.services;
 
 import com.ecommerce.payment.dto.CustomerDTO;
+import com.ecommerce.payment.error.CustomerNotFound;
 import com.ecommerce.payment.mappers.CustomerMapper;
 import com.ecommerce.payment.model.Customer;
 import com.ecommerce.payment.repository.CustomerRepository;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Service layer for managing customer-related business logic in the e-commerce payment system.
@@ -55,6 +58,32 @@ public class CustomerService {
         return customers.stream()
                 .map(customer -> this.customerMapper.customerToCustomerDTO(customer))
                 .toList();
+    }
+
+    /**
+     * Retrieves a single customer by its string UUID identifier.
+     *
+     * <p>Converts the provided string to a {@link java.util.UUID} and queries the
+     * {@link com.ecommerce.payment.repository.CustomerRepository} for the entity.
+     * If no customer is found the method throws {@link com.ecommerce.payment.error.CustomerNotFound}
+     * so callers (for example controllers) can map this to an HTTP 404 response.</p>
+     *
+     * <p>Note: {@link java.util.UUID#fromString(String)} will throw {@link IllegalArgumentException}
+     * if the provided id is not a valid UUID string; callers should validate input or handle
+     * that exception as appropriate.</p>
+     *
+     * @param id the customer's UUID as a String (expected non-null and in UUID format)
+     * @return a {@link com.ecommerce.payment.dto.CustomerDTO} representing the requested customer
+     * @throws com.ecommerce.payment.error.CustomerNotFound if a customer with the provided id does not exist
+     * @throws IllegalArgumentException if the provided id is not a valid UUID string
+     */
+    public CustomerDTO getCustomerById(String id) throws CustomerNotFound, IllegalArgumentException {
+        UUID uuid = UUID.fromString(id);
+        Optional<Customer> customer = this.customerRepository.findById(uuid);
+        if (customer.isEmpty()) {
+            throw new CustomerNotFound("Customer Not found");
+        }
+        return this.customerMapper.customerToCustomerDTO(customer.get());
     }
 
 }
