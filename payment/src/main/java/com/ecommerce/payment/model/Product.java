@@ -59,7 +59,7 @@ public class Product {
      * Timestamp when the product was created. Stored as {@link LocalDateTime}.
      */
     @CreationTimestamp
-    @Column(updatable = false)
+    @Column(updatable = false, name="created_at")
     private LocalDateTime createdAt;
 
     /**

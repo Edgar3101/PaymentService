@@ -27,6 +27,11 @@ services:
             - mysql-db
         networks:
             - payment-network
+        develop:
+          watch:
+            - action: rebuild
+              path: ./payment
+              target: /app
 
     grafana:
         image: grafana/grafana:latest

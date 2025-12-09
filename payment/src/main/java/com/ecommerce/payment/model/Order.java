@@ -52,7 +52,7 @@ public class Order {
      * consider using {@link java.time.Instant} or {@link java.time.LocalDateTime}.</p>
      */
     @CreationTimestamp
-    @Column(updatable = false)
+    @Column(updatable = false, name="created_at")
     private LocalTime createdAt;
 
     /**
