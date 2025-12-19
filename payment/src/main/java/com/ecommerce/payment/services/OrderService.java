@@ -58,10 +58,13 @@ public class OrderService {
      */
     public OrderDTO createOrder(OrderDTO orderDTO) throws IllegalArgumentException, RuntimeException
     {
+        // We save the order entity converted from DTO
         Order order = this.orderRepository.save(this.orderMapper.orderDTOToOrder(orderDTO));
         log.info("Order created with id: {}", order.getId());
+        // Publish the CustomBillEvent for the created order
         this.publisher.publishEvent(new CustomBillEvent(this, order));
         log.info("CustomBillEvent published for Order id: {}", order.getId());
+        // Return the saved order as DTO
         return this.orderMapper.orderToOrderDTO(order);
     }
 
